@@ -66,6 +66,11 @@
     return null;
   }
 
+  const reset = () => {
+    board = Array(9).fill('');
+    currentPlayer = 'X';
+    renderBoard(board);
+  }
   init();
   renderBoard(board);
 })()
