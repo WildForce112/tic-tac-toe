@@ -1,3 +1,10 @@
+body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vh 4vw;
+}
+
 .board {
   display: grid;
   grid-template-columns: repeat(3, 100px);
@@ -14,4 +21,14 @@
   font-size: 36px;
   border: 1px solid #ccc;
   cursor: pointer;
+}
+
+.player1, .player2 {
+  font-size: calc(16px + 0.1vw);
+}
+
+.player2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
