@@ -7,6 +7,7 @@
   let $player1 = null;
   let $player2 = null;
   let $players = null;
+  let $resetBtn = null;
 
   const player1 = createPlayer('player1', 'X');
   const player2 = createPlayer('player2', 'O');
@@ -16,24 +17,12 @@
     $board = document.querySelector('.board');
     $player1 = document.querySelector('.player1');
     $player2 = document.querySelector('.player2');
-    $players = document.querySelectorAll('.players')
-
-
-    if (!$board) {
-      console.error('.board element not found');
-      return;
-    }
-    if (!$player1) {
-      console.error('.player1 element not found');
-      return;
-    }
-    if (!$player2) {
-      console.error('.player2 element not found');
-      return;
-    }
+    $players = document.querySelectorAll('.players');
+    $resetBtn = document.querySelector('.resetBtn');
 
     handleMoves();
     handlePlayerEdit();
+    handleReset();
   }
 
   const handleMoves = () => {
@@ -59,7 +48,14 @@
         reset();
       })
     })
+  }
 
+  const handleReset = () => {
+    $resetBtn.addEventListener('click', () => {
+      player1.score = 0;
+      player2.score = 0;
+      reset();
+    })
   }
 
   const renderCell = (index, value) => {
