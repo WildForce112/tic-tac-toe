@@ -1,4 +1,5 @@
-body {
+body>:first-child {
+  font-size: calc(16px + 0.1vw);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,8 +24,29 @@ body {
   cursor: pointer;
 }
 
+.players {
+  display: flex;
+  gap: 1vw;
+}
+
+.players>button {
+  /* height: 100%; */
+  /* width: 1fr; */
+  padding: 1vh 2vw;
+  border: hidden;
+  background-color: cornflowerblue;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5em;
+  /* background-color: red; */
+}
+
 .player1, .player2 {
-  font-size: calc(16px + 0.1vw);
+  background-color: forestgreen;
+  padding: 1vh 1vw;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 .player2 {

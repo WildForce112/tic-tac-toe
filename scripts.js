@@ -6,6 +6,8 @@
   let $board = null;
   let $player1 = null;
   let $player2 = null;
+  let $players = null;
+
   const player1 = createPlayer('player1', 'X');
   const player2 = createPlayer('player2', 'O');
   let currentPlayer = player1.marker;
@@ -14,8 +16,8 @@
     $board = document.querySelector('.board');
     $player1 = document.querySelector('.player1');
     $player2 = document.querySelector('.player2');
+    $players = document.querySelectorAll('.players')
 
-    console.log($player1);
 
     if (!$board) {
       console.error('.board element not found');
@@ -30,14 +32,34 @@
       return;
     }
 
+    handleMoves();
+    handlePlayerEdit();
+  }
 
-
+  const handleMoves = () => {
     $board.addEventListener('click', (e) => {
       const cell = e.target.closest('.cell');
-      if(!cell) return;
+      if(!cell) {
+        return;
+      }
       const idx = Number(cell.dataset.index);
       handlePlayerMove(idx);
     })
+  }
+
+  const handlePlayerEdit = () => {
+    $players.forEach(player => {
+      player.addEventListener('click', (e) => {
+        const btn = e.target.closest('.editBtn');
+        if(!btn) return;
+        const $targetPlayer = player.querySelector('.player');
+        const targetPlayer = $targetPlayer.classList.contains('player1') ? player1 : player2;
+        const newName = prompt(`What's ${targetPlayer.name} new name?`);
+        targetPlayer.name = newName.replaceAll(' ', '') === (null || '') ? targetPlayer.name : newName;
+        reset();
+      })
+    })
+
   }
 
   const renderCell = (index, value) => {
@@ -52,10 +74,10 @@
     $player.textContent = '';
     const $name = document.createElement('div');
     const $marker = document.createElement('div');
-    const $score = document.createTextNode(player.score);
+    const $score = document.createElement('div');
     $name.textContent = `Name: ${player.name}`;
     $marker.textContent = `Marker: ${player.marker}`;
-
+    $score.textContent = `Score: ${player.score}`;
     $player.appendChild($name);
     $player.appendChild($marker);
     $player.appendChild($score);
@@ -69,7 +91,6 @@
     });
     renderPlayer(player1, $player1);
     renderPlayer(player2, $player2);
-
   }
 
   const handlePlayerMove = (index) => {
@@ -86,7 +107,7 @@
       return;
     }
     if (board.every(Boolean)) {
-      setTimeout(() => alert(`Draw!`), 0);
+      setTimeout(() => alert(`It's a Draw!`), 0);
       reset();
       return;
     }
