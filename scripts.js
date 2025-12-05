@@ -101,8 +101,8 @@
 
     const winner = checkWinner(board);
     if (winner) {
-      setTimeout(() => alert(`${winner} wins!`), 0);
-      winner === player1.marker ? player1.score++ : player2.score++;
+      setTimeout(() => alert(`${winner.name} wins!`), 0);
+      winner === player1 ? player1.score++ : player2.score++;
       reset();
       return;
     }
@@ -122,7 +122,7 @@
       [0,4,8], [2,4,6]
     ]
     for (const [a, b, c] of lines) {
-      if(board[a] && board[a] == board[b] && board[a] == board[c]) return board[a];
+      if(board[a] && board[a] == board[b] && board[a] == board[c]) return board[a] === player1.marker ? player1 : player2;
     }
     return null;
   }
